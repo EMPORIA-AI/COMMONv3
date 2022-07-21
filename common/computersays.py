@@ -23,17 +23,24 @@ import os, copy
 
 from cubed4th import FORTH
 
-from dotenv import load_dotenv
-load_dotenv(verbose=True)
+from dotenv import dotenv_values
+
+config = {
+    **dotenv_values(".env.shared"),  # load shared development variables
+    **dotenv_values(".env.secret"),  # load sensitive variables
+    # **os.environ,  # override loaded values with environment variables
+}
 
 class ComputerSays(dict):
 
     def __init__(self, **kwargs):
-        ...
+        global config
+        self.config = config
 
-    @staticmethod ### OS_GETENV ###
-    def word_OS_under_GETENV__R_s3(e, t, c, s1, s2):
-        return (os.getenv(s2, s1),)
+    @staticmethod ### GETENV ###
+    def word_GETENV__R_s3(e, t, c, s1, s2):
+        global config
+        return (config.get(s2, s1),)
 
     def load(self, name, code):
 

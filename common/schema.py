@@ -37,7 +37,6 @@ from .thing import *
 from .alter import *
 
 from .broker import *
-from .keeper import *
 
 # given parallel arrays of where the buyer is and the things they are needing
 # the locate server will return a list of the urls where those markets are
@@ -340,7 +339,6 @@ class Manage_DATA(BaseModel):
     things: Optional[List[Thing]] = None
     alters: Optional[List[Alter]] = None
     brokers: Optional[List[Broker]] = None
-    keepers: Optional[List[Keeper]] = None
 
 class Manage(BaseModel):
     result: Optional[Dict] = None
@@ -351,5 +349,4 @@ class Manage(BaseModel):
     things: Optional[List[Thing]] = None
     alters: Optional[List[Alter]] = None
     brokers: Optional[List[Broker]] = None
-    keepers: Optional[List[Keeper]] = None
 
